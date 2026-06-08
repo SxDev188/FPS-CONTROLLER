@@ -7,6 +7,21 @@ public class PlayerController : MonoBehaviour
     [Header("Components")]
     [SerializeField]
     private CinemachineInputAxisController cameraInputAxisController;
+    
+    [SerializeField]
+    private CinemachineCamera cinemachineCamera;
+
+    [SerializeField]
+    private Transform playerStandingPosition;
+    
+    [SerializeField]
+    private Transform playerCrouchPosition;
+
+    [SerializeField]
+    private CapsuleCollider standingCollider;
+
+    [SerializeField]
+    private CapsuleCollider crouchingCollider;
 
     [Header("Move Values")]
     [SerializeField]
@@ -50,6 +65,7 @@ public class PlayerController : MonoBehaviour
     private InputAction moveAction;
     private InputAction jumpAction;
     private InputAction sprintAction;
+    private InputAction crouchAction;
 
     private Rigidbody playerRigidBody;
     private Camera playerCamera;
@@ -58,13 +74,14 @@ public class PlayerController : MonoBehaviour
     private bool shouldJump;
     private float jumpTimer = 0;
     private bool grounded;
-    private bool isSprinting = false;
+    private bool isSprinting;
 
     void Start()
     {
         moveAction = InputSystem.actions.FindAction("Move");
         jumpAction = InputSystem.actions.FindAction("Jump");
         sprintAction = InputSystem.actions.FindAction("Sprint");
+        crouchAction = InputSystem.actions.FindAction("Crouch");
 
         playerCamera = Camera.main;
         playerRigidBody = GetComponent<Rigidbody>();
@@ -107,6 +124,20 @@ public class PlayerController : MonoBehaviour
                 c.Input.Gain = -mouseSensitivty;
             }
         }
+
+        if (crouchAction.IsPressed())
+        {
+            cinemachineCamera.Follow = playerCrouchPosition;
+            standingCollider.enabled = false;
+            crouchingCollider.enabled = true;
+        }
+        else
+        {
+            cinemachineCamera.Follow = playerStandingPosition;
+            standingCollider.enabled = true;
+            crouchingCollider.enabled = false;
+        }
+
     }
 
     private void FixedUpdate()
@@ -138,7 +169,7 @@ public class PlayerController : MonoBehaviour
         {
             if(toggleDebug)
                 Debug.DrawRay(transform.position, -hit.normal * hit.distance, Color.red); 
-            
+
             jumpTimer = 0;
             return true;
         }
