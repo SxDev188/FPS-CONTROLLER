@@ -1,16 +1,21 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Values")]
+    [Header("Components")]
+    [SerializeField]
+    private CinemachineInputAxisController cameraInputAxisController;
+
+    [Header("Move Values")]
     [SerializeField]
     private float moveForce = 1.5f; 
 
     [SerializeField]
     private float jumpForce = 5.0f;
     
-    [Space]
+    [Header("Control Values")]
     [SerializeField]
     private float fallOffTime = 1f;
 
@@ -20,11 +25,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float groundedAirControl = 1f;
 
+    [Header("Sensitivity")]
+    [SerializeField]
+    private float mouseSensitivty = 1f;
+
+    [SerializeField]
+    private float mouseAcceleration = 0f;
+
+    [SerializeField]
+    private float mouseDecceleration = 0f;
+
     [Header("Debug")]
     [SerializeField]
     bool toggleDebug;
 
-
+    // ==========================================//
     private InputAction moveAction;
     private InputAction jumpAction;
 
@@ -46,10 +61,26 @@ public class PlayerController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
     }
 
     void Update()
     {
+
+        foreach(var c in cameraInputAxisController.Controllers)
+        {
+            c.Driver.AccelTime = mouseAcceleration;
+            c.Driver.DecelTime = mouseDecceleration;
+            if(c.Name == "Look X (Pan)")
+            {
+                c.Input.Gain = mouseSensitivty;
+
+            }
+            if(c.Name == "Look Y (Tilt)")
+            {
+                c.Input.Gain = -mouseSensitivty;
+            }
+        }
 
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
         finalMoveVector = transform.forward * moveValue.y + transform.right * moveValue.x;
@@ -70,11 +101,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 velocity = playerRigidBody.linearVelocity;
         Vector3 targetVelocity = finalMoveVector.normalized * moveForce;
-        Vector3 appliedVelocity = new Vector3(
-                targetVelocity.x - velocity.x,
-                0,
-                targetVelocity.z - velocity.z
-        );
+        Vector3 appliedVelocity = new Vector3(targetVelocity.x - velocity.x, 0, targetVelocity.z - velocity.z);
 
         float moveControlMultiplier = grounded ? groundedAirControl : airControl;
         playerRigidBody.AddForce(appliedVelocity * moveControlMultiplier, ForceMode.VelocityChange);
