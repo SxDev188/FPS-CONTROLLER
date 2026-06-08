@@ -395,7 +395,7 @@ MonoBehaviour:
   mouseSensitivty: 2.5
   mouseAcceleration: 0
   mouseDecceleration: 0
-  toggleDebug: 0
+  toggleDebug: 1
 --- !u!114 &251444960
 MonoBehaviour:
   m_ObjectHideFlags: 0

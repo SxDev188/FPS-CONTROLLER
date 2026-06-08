@@ -15,6 +15,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float jumpForce = 5.0f;
     
+    [Header("Raycast Settings")]
+    [SerializeField]
+    private float groundCheckLength = 1.1f;
+
     [Header("Control Values")]
     [SerializeField]
     private float fallOffTime = 1f;
@@ -118,10 +122,10 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         int layerMask = ~(1 << 3);
 
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.1f, layerMask)) // TODO: add height check/config
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, groundCheckLength, layerMask))
         {
             if(toggleDebug)
-                Debug.DrawRay(transform.position, Vector3.down * hit.distance, Color.red); 
+                Debug.DrawRay(transform.position, -hit.normal * hit.distance, Color.red); 
             
             jumpTimer = 0;
             return true;
@@ -129,7 +133,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             if(toggleDebug)
-                Debug.DrawRay(transform.position, Vector3.down * 1000, Color.white); 
+                Debug.DrawRay(transform.position, Vector3.down * groundCheckLength, Color.white); 
             
             return false;
         }
