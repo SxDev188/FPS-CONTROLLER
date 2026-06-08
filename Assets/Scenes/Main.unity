@@ -240,11 +240,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 41455439}
+  - component: {fileID: 41455444}
   - component: {fileID: 41455443}
   - component: {fileID: 41455442}
   - component: {fileID: 41455441}
   - component: {fileID: 41455440}
-  - component: {fileID: 41455444}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -389,6 +389,7 @@ MonoBehaviour:
   moveForce: 5
   jumpForce: 10
   fallOffTime: 0.1
+  toggleDebug: 0
 --- !u!114 &251444960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -562,7 +563,7 @@ MonoBehaviour:
       Enabled: 1
       Input:
         InputAction: {fileID: 715558790}
-        Gain: -1
+        Gain: -2
         CancelDeltaTime: 0
       InputValue: 0
       Driver:

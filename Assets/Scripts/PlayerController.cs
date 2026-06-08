@@ -3,15 +3,27 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    // TODO: tweak default values
+    [Header("Values")]
     [SerializeField]
     private float moveForce = 1.5f; 
 
     [SerializeField]
     private float jumpForce = 5.0f;
-
+    
+    [Space]
     [SerializeField]
     private float fallOffTime = 1f;
+
+    [SerializeField]
+    private float airControl = 0.3f;
+
+    [SerializeField]
+    private float groundedAirControl = 1f;
+
+    [Header("Debug")]
+    [SerializeField]
+    bool toggleDebug;
+
 
     private InputAction moveAction;
     private InputAction jumpAction;
@@ -64,7 +76,7 @@ public class PlayerController : MonoBehaviour
                 targetVelocity.z - velocity.z
         );
 
-        float moveControlMultiplier = grounded ? 1 : 0.3f; // TODO: add slider in inspector
+        float moveControlMultiplier = grounded ? groundedAirControl : airControl;
         playerRigidBody.AddForce(appliedVelocity * moveControlMultiplier, ForceMode.VelocityChange);
 
         if (shouldJump)
@@ -81,13 +93,17 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.1f, layerMask)) // TODO: add height check/config
         {
-            Debug.DrawRay(transform.position, Vector3.down * hit.distance, Color.red); // TODO: Make Debug toggle
+            if(toggleDebug)
+                Debug.DrawRay(transform.position, Vector3.down * hit.distance, Color.red); 
+            
             jumpTimer = 0;
             return true;
         }
         else
         {
-            Debug.DrawRay(transform.position, Vector3.down * 1000, Color.white); // TODO: Make Debug toggle
+            if(toggleDebug)
+                Debug.DrawRay(transform.position, Vector3.down * 1000, Color.white); 
+            
             return false;
         }
 
