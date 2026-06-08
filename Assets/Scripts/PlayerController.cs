@@ -1,7 +1,6 @@
-using System.ComponentModel;
-using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -31,13 +30,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float jumpForce = 5.0f;
 
-    [SerializeField]
+    [Space, SerializeField]
     private bool useTogglableSprint;
 
     [SerializeField]
     private bool useTogglableCrouch;
 
-    [SerializeField]
+    [Space, SerializeField]
     private float sprintMultiplier = 2f;
 
     [SerializeField]
@@ -199,6 +198,7 @@ public class PlayerController : MonoBehaviour
         Vector3 appliedVelocity = new Vector3(targetVelocity.x - velocity.x, 0, targetVelocity.z - velocity.z);
 
         float moveControlMultiplier = grounded ? groundedAirControl : airControl;
+
         playerRigidBody.AddForce(appliedVelocity * moveControlMultiplier, ForceMode.VelocityChange);
 
         if (shouldJump)
