@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private float jumpForce = 5.0f;
+
+    [SerializeField]
+    private float sprintMultiplier = 2f;
     
     [Header("Raycast Settings")]
     [SerializeField]
@@ -46,6 +49,7 @@ public class PlayerController : MonoBehaviour
     // ==========================================//
     private InputAction moveAction;
     private InputAction jumpAction;
+    private InputAction sprintAction;
 
     private Rigidbody playerRigidBody;
     private Camera playerCamera;
@@ -54,11 +58,13 @@ public class PlayerController : MonoBehaviour
     private bool shouldJump;
     private float jumpTimer = 0;
     private bool grounded;
+    private bool isSprinting = false;
 
     void Start()
     {
         moveAction = InputSystem.actions.FindAction("Move");
         jumpAction = InputSystem.actions.FindAction("Jump");
+        sprintAction = InputSystem.actions.FindAction("Sprint");
 
         playerCamera = Camera.main;
         playerRigidBody = GetComponent<Rigidbody>();
@@ -70,6 +76,22 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        Vector2 moveValue = moveAction.ReadValue<Vector2>();
+        finalMoveVector = transform.forward * moveValue.y + transform.right * moveValue.x;
+        grounded = isGrounded();
+
+        jumpTimer += Time.deltaTime;
+
+        if (jumpAction.WasPressedThisFrame() && (grounded || jumpTimer < fallOffTime))
+        {
+            shouldJump = true;
+        }
+
+        if (sprintAction.IsPressed())
+            isSprinting = true;
+        else
+            isSprinting = false;
+
 
         foreach(var c in cameraInputAxisController.Controllers)
         {
@@ -85,17 +107,6 @@ public class PlayerController : MonoBehaviour
                 c.Input.Gain = -mouseSensitivty;
             }
         }
-
-        Vector2 moveValue = moveAction.ReadValue<Vector2>();
-        finalMoveVector = transform.forward * moveValue.y + transform.right * moveValue.x;
-        grounded = isGrounded();
-
-        jumpTimer += Time.deltaTime;
-
-        if (jumpAction.WasPressedThisFrame() && (grounded || jumpTimer < fallOffTime))
-        {
-            shouldJump = true;
-        }
     }
 
     private void FixedUpdate()
@@ -105,6 +116,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 velocity = playerRigidBody.linearVelocity;
         Vector3 targetVelocity = finalMoveVector.normalized * moveForce;
+        targetVelocity *= !isSprinting ? 1 : sprintMultiplier;
         Vector3 appliedVelocity = new Vector3(targetVelocity.x - velocity.x, 0, targetVelocity.z - velocity.z);
 
         float moveControlMultiplier = grounded ? groundedAirControl : airControl;

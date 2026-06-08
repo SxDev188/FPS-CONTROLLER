@@ -389,13 +389,14 @@ MonoBehaviour:
   cameraInputAxisController: {fileID: 619520741}
   moveForce: 5
   jumpForce: 10
+  groundCheckLength: 1.1
   fallOffTime: 0.1
   airControl: 0.3
   groundedAirControl: 1
   mouseSensitivty: 2.5
   mouseAcceleration: 0
   mouseDecceleration: 0
-  toggleDebug: 1
+  toggleDebug: 0
 --- !u!114 &251444960
 MonoBehaviour:
   m_ObjectHideFlags: 0
