@@ -397,7 +397,10 @@ MonoBehaviour:
   crouchingCollider: {fileID: 41455445}
   moveForce: 5
   jumpForce: 10
+  useTogglableSprint: 1
+  useTogglableCrouch: 0
   sprintMultiplier: 2
+  slideSpeedMultiplier: 1.2
   groundCheckLength: 1.1
   fallOffTime: 0.1
   airControl: 0.3

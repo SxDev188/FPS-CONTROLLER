@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -31,7 +32,16 @@ public class PlayerController : MonoBehaviour
     private float jumpForce = 5.0f;
 
     [SerializeField]
+    private bool useTogglableSprint;
+
+    [SerializeField]
+    private bool useTogglableCrouch;
+
+    [SerializeField]
     private float sprintMultiplier = 2f;
+
+    [SerializeField]
+    private float slideSpeedMultiplier = 1.2f;
     
     [Header("Raycast Settings")]
     [SerializeField]
@@ -59,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField]
-    bool toggleDebug;
+    private bool toggleDebug;
 
     // ==========================================//
     private InputAction moveAction;
@@ -74,7 +84,9 @@ public class PlayerController : MonoBehaviour
     private bool shouldJump;
     private float jumpTimer = 0;
     private bool grounded;
-    private bool isSprinting;
+    private bool shouldSprint;
+    private bool shouldCrouch;
+    private bool shouldSlide;
 
     void Start()
     {
@@ -104,10 +116,18 @@ public class PlayerController : MonoBehaviour
             shouldJump = true;
         }
 
-        if (sprintAction.IsPressed())
-            isSprinting = true;
+        if (!useTogglableSprint)
+        {
+            if (sprintAction.IsPressed())
+                shouldSprint = true;
+            else
+                shouldSprint = false;
+        }
         else
-            isSprinting = false;
+        {
+            if (sprintAction.WasPressedThisFrame())
+                shouldSprint = !shouldSprint;
+        }
 
 
         foreach(var c in cameraInputAxisController.Controllers)
@@ -125,17 +145,44 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (crouchAction.IsPressed())
+
+        if (useTogglableCrouch)
+        {
+            if (crouchAction.WasPressedThisFrame())
+            {
+                shouldCrouch = !shouldCrouch;
+            }
+        }
+        else
+        {
+            if(crouchAction.IsPressed())
+                shouldCrouch = true;
+            else
+                shouldCrouch = false;
+        }
+
+
+        if (shouldCrouch)
         {
             cinemachineCamera.Follow = playerCrouchPosition;
             standingCollider.enabled = false;
             crouchingCollider.enabled = true;
+
+            if (shouldSprint)
+            {
+                shouldSlide = true;
+            }
+            else
+            {
+                shouldSlide = false;
+            }
         }
         else
         {
             cinemachineCamera.Follow = playerStandingPosition;
             standingCollider.enabled = true;
             crouchingCollider.enabled = false;
+            shouldSlide = false;
         }
 
     }
@@ -147,7 +194,8 @@ public class PlayerController : MonoBehaviour
 
         Vector3 velocity = playerRigidBody.linearVelocity;
         Vector3 targetVelocity = finalMoveVector.normalized * moveForce;
-        targetVelocity *= !isSprinting ? 1 : sprintMultiplier;
+        targetVelocity *= !shouldSprint ? 1 : sprintMultiplier;
+        targetVelocity *= !shouldSlide ? 1 : slideSpeedMultiplier;
         Vector3 appliedVelocity = new Vector3(targetVelocity.x - velocity.x, 0, targetVelocity.z - velocity.z);
 
         float moveControlMultiplier = grounded ? groundedAirControl : airControl;
