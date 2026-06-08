@@ -26,14 +26,14 @@ A simple, physics-based, fps controller built for Unity 6.3 LTS.
 |Jump|Space|
 |Look|Mouse|
 
-## Future Improvements: 
+## Future Improvements:
+- [x] Sprinting System 
+- [x] Crouch & Slide mechanics
+- [x] Surface-based movement
 - [ ] Wall running
-- [ ] Sprinting System
 - [ ] Gravity Boots
 - [ ] Jump buffering
-- [ ] Crouch & Slide mechanics
 - [ ] Head bob
-- [ ] Surface-based movement
 - [ ] General QoL improvements & fixes (e.g slope handling or slope limiting)
 
 ## Demo: 
