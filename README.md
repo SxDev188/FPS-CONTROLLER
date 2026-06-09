@@ -2,7 +2,7 @@
 A simple, physics-based, fps controller built for Unity 6.3 LTS. 
 
 > [!NOTE]
-> This Repo is under construction. I reserve the right to change things as time goes on.
+> This repository is under construction. I reserve the right to change things as time goes on.
 
 ## Features:
 - Physics-based movement using Rigidbody
@@ -11,12 +11,16 @@ A simple, physics-based, fps controller built for Unity 6.3 LTS.
 - Camera-aligned movement
 - Configurable movement forces
 - Layer-based ground detection
+- Wall running, Sliding & Sprinting
+- Simple Debug Visuals togglable in the inspector
 
 ## Technical Highlights:
 - Uses ```ForceMode.VelocityChange``` for tight FPS responsiveness
 - Separates input polling from physics calculations
-- Implements buffered jumping logic
+- Implements buffered jumping logic (Variable Ground Check during Raycasting)
 - Uses raycast-based ground detection with layer masking
+- Separated into different systems for modularity
+- Uses native Unity Packages (Cinemachine & New Input System!)
 
 ## Controls:
 
@@ -34,13 +38,16 @@ A simple, physics-based, fps controller built for Unity 6.3 LTS.
 - [x] Jump buffering (Variable Ground Check Raycast)
 - [ ] General QoL improvements & fixes (e.g systems separation)
 
-## Demo: 
-> [!NOTE] 
-Coming soon!
+## Preview: 
+A general overview of the sample scene in the project.
+![overview](img/overview.png)
 
 ## Design Decisions: 
 > [!NOTE] 
 More coming soon!
+
+## Installation:
+To install the project you simply clone the repository or press Code > Download ZIP & then extract the ZIP file. No installation media or executable is provided. Specific Unity version used is Unity 6000.3.13f1, but any Unity 6.3 LTS version should work without any major issues.
 
 ## License: 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
