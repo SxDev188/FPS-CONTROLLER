@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     
     [Header("Raycast Settings")]
     [SerializeField]
-    private float groundCheckLength = 1.1f;
+    private float groundCheckLength = 1.5f;
 
     [Header("Control Values")]
     [SerializeField]
@@ -117,17 +117,13 @@ public class PlayerController : MonoBehaviour
 
         if (!useTogglableSprint)
         {
-            if (sprintAction.IsPressed())
-                shouldSprint = true;
-            else
-                shouldSprint = false;
+            if (sprintAction.IsPressed()) shouldSprint = true;
+            else shouldSprint = false;
         }
         else
         {
-            if (sprintAction.WasPressedThisFrame())
-                shouldSprint = !shouldSprint;
+            if (sprintAction.WasPressedThisFrame()) shouldSprint = !shouldSprint;
         }
-
 
         foreach(var c in cameraInputAxisController.Controllers)
         {
@@ -144,7 +140,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-
         if (useTogglableCrouch)
         {
             if (crouchAction.WasPressedThisFrame())
@@ -154,12 +149,9 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if(crouchAction.IsPressed())
-                shouldCrouch = true;
-            else
-                shouldCrouch = false;
+            if(crouchAction.IsPressed()) shouldCrouch = true;
+            else shouldCrouch = false;
         }
-
 
         if (shouldCrouch)
         {
