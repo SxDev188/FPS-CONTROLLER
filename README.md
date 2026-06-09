@@ -14,14 +14,6 @@ A simple, physics-based, fps controller built for Unity 6.3 LTS.
 - Wall running, Sliding & Sprinting
 - Simple Debug Visuals togglable in the inspector
 
-## Controls
-
-|Action|Input|
-|---|---|
-|Move|WASD|
-|Jump|Space|
-|Look|Mouse|
-
 ## Preview
 A general overview of the sample scene in the project.
 ![overview](img/overview.png)
@@ -59,8 +51,16 @@ A Rigidbody-based controller was chosen over Unity's CharacterController to prov
 - [ ] Magnet Boots
 - [ ] Gravity Boots
 
+## Controls
+
+|Action|Input|
+|---|---|
+|Move|WASD|
+|Jump|Space|
+|Look|Mouse|
+
 ## Installation
-To install the project you simply clone the repository or press Code > Download ZIP & then extract the ZIP file. No installation media or executable is provided. Specific Unity version used is Unity 6000.3.13f1, but any Unity 6.3 LTS version should work without any major issues.
+To install the project you clone the repository or press Code > Download ZIP. No executable is provided. Specific Unity version used is Unity 6000.3.13f1, but any Unity 6.3 LTS version should work without any major issues.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
