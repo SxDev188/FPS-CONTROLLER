@@ -186,6 +186,17 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("WallRun"))
+        {
+            if(collision.GetContact(0).normal != Vector3.up && collision.GetContact(0).normal != Vector3.down)
+            {
+                playerRigidBody.linearVelocity = new Vector3(playerRigidBody.linearVelocity.x, 0, playerRigidBody.linearVelocity.z);
+            }
+        }
+    }
+
     private void FixedUpdate()
     {
 
