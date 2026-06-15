@@ -240,7 +240,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 41455439}
-  - component: {fileID: 41455444}
+  - component: {fileID: 41455448}
+  - component: {fileID: 41455447}
+  - component: {fileID: 41455446}
   - component: {fileID: 41455443}
   - component: {fileID: 41455442}
   - component: {fileID: 41455441}
@@ -377,38 +379,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 41455438}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &41455444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 41455438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19d78e54812fd1d47a8f0b386c007c95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementScript
-  cameraInputAxisController: {fileID: 619520741}
-  cinemachineCamera: {fileID: 619520736}
-  playerStandingPosition: {fileID: 67790951}
-  playerCrouchPosition: {fileID: 2069300819}
-  standingCollider: {fileID: 41455440}
-  crouchingCollider: {fileID: 41455445}
-  moveForce: 5
-  jumpForce: 10
-  useTogglableSprint: 1
-  useTogglableCrouch: 0
-  sprintMultiplier: 2
-  slideSpeedMultiplier: 1.2
-  groundCheckLength: 1.1
-  fallOffTime: 0.1
-  airControl: 0.3
-  groundedAirControl: 1
-  mouseSensitivty: 2.5
-  mouseAcceleration: 0
-  mouseDecceleration: 0
-  toggleDebug: 1
 --- !u!136 &41455445
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -432,6 +402,60 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: -0.5, z: 0}
+--- !u!114 &41455446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41455438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88576359b3e60f7658aedac95a13a0af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCollisionScript
+  standingCollider: {fileID: 41455440}
+  crouchingCollider: {fileID: 41455445}
+--- !u!114 &41455447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41455438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67c897686f3f1a416b3cda1bd0d32210, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerLookScript
+  mouseSensitivty: 1
+  mouseAcceleration: 0
+  mouseDecceleration: 0
+  cameraInputAxisController: {fileID: 619520741}
+  cinemachineCamera: {fileID: 619520736}
+  playerStandingPosition: {fileID: 67790951}
+  playerCrouchPosition: {fileID: 2069300819}
+--- !u!114 &41455448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41455438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6567bc5d242c0511f84f5fcce6ab3254, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementScript
+  moveForce: 1.5
+  jumpForce: 5
+  useTogglableSprint: 1
+  useTogglableCrouch: 1
+  sprintMultiplier: 2
+  slideSpeedMultiplier: 1.2
+  fallOffTime: 1
+  airControl: 0.3
+  groundedAirControl: 1
 --- !u!1 &67790950
 GameObject:
   m_ObjectHideFlags: 0
