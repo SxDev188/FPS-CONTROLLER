@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 200123283884978797}
   - component: {fileID: 3100079318423651407}
   - component: {fileID: 2523744091027034422}
+  - component: {fileID: 1794867887473245595}
   - component: {fileID: 2821176126340457258}
   - component: {fileID: 5286903299526366070}
   - component: {fileID: 4291554088966312284}
@@ -157,6 +158,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCollisionScript
   standingCollider: {fileID: 8071374924004876911}
   crouchingCollider: {fileID: 8413779203597708526}
+--- !u!114 &1794867887473245595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7292814725219290472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d1085585c2df1f4d80ca2ea7b998a14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerPowerUpScript
 --- !u!33 &2821176126340457258
 MeshFilter:
   m_ObjectHideFlags: 0

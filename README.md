@@ -47,7 +47,7 @@ A Rigidbody-based controller was chosen over Unity's CharacterController to prov
 - [x] Surface-based movement
 - [x] Wall running
 - [x] Jump buffering (Variable Ground Check Raycast)
-- [ ] Quality of Life improvements & fixes (e.g systems separation & better prefabs)
+- [x] Quality of Life improvements & fixes (e.g systems separation & better prefabs)
 - [ ] Magnet Boots
 - [ ] Gravity Boots
 
