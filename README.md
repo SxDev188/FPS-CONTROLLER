@@ -68,6 +68,3 @@ To install the project you clone the repository or press Code > Download ZIP. No
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## AI Disclosure
-AI was used only for pratially writing and refining this README. The project's code, architecture, gameplay systems, implementation, and technical decisions are my own work.
