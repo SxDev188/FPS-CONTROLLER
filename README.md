@@ -36,10 +36,13 @@ Ground checks are performed with raycasts as they are performant and allow a jum
 
 A Rigidbody-based controller was chosen over Unity's CharacterController to provide greater flexibility for advanced movement mechanics such as wall running and future movement extensions.
 
+Unity's built-in event system was chosen for communication between scripts, helping to decouple components and improve flexibility during prototyping
+
 ## What I've learned
 - Using Cinemachine for Camera modifications
 - Designing responsive movement systems with Rigidbody Physics
 - Raycasting inside of the Unity Engine
+- Using Event systems for x-script communication
 
 ## Development Plan
 - [x] Sprinting System 
@@ -64,3 +67,6 @@ To install the project you clone the repository or press Code > Download ZIP. No
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🤖 AI Disclosure
+AI was used only for pratially writing and refining this README. The project's code, architecture, gameplay systems, implementation, and technical decisions are my own work.
