@@ -61,6 +61,7 @@ Unity's built-in event system was chosen for communication between scripts, help
 |Move|WASD|
 |Jump|Space|
 |Look|Mouse|
+|Crouch|C|
 
 ## Installation
 To install the project you clone the repository or press Code > Download ZIP. No executable is provided. Specific Unity version used is Unity 6000.3.13f1, but any Unity 6.3 LTS version should work without any major issues.
@@ -68,5 +69,5 @@ To install the project you clone the repository or press Code > Download ZIP. No
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🤖 AI Disclosure
+## AI Disclosure
 AI was used only for pratially writing and refining this README. The project's code, architecture, gameplay systems, implementation, and technical decisions are my own work.
