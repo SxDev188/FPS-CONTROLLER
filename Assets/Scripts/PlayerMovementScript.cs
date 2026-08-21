@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerMovementScript : MonoBehaviour
@@ -122,5 +123,16 @@ public class PlayerMovementScript : MonoBehaviour
             playerRigidBody.AddForce(transform.up * jumpForce, ForceMode.VelocityChange);
             shouldJump = false;
         }
+    }
+
+    public void ApplyMagnetBoots()
+    {
+        // debug
+        Debug.Log("We picked up a power up!");
+    }
+
+    public void ApplyGravityBoots()
+    {
+        
     }
 }
